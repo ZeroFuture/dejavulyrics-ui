@@ -63,7 +63,7 @@ export default function MediaCard(props) {
         <div className={classes.details}>
             <CardContent className={classes.content}>
             <Typography component="h5" variant="h5">
-                <Link onClick={(event) => props.onSelectMedia({"artist": props.artist, "title": props.title, "lyrics": props.lyrics})}>
+                <Link onClick={(event) => props.onSelectMedia({"artist": props.artist, "title": props.title, "lyrics": props.lyrics, "videoId": props.videoId})}>
                     {title}
                 </Link>
             </Typography>

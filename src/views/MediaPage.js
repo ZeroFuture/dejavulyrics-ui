@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import youtube from '../apis/youtube';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 
-const KEY = process.env.REACT_APP_YOUTUBE_KEY;
-
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
-      width: 1500,
+      width: 1150,
       margin: 'auto',
     },
     content: {
@@ -22,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
       padding: 'auto',
     },
     media: {
-        height: 500,
-        width: 1000,
+        height: '100%',
+        width: '100%',
     },
   }));
 
@@ -32,30 +29,8 @@ export default function MediaPage(props) {
     const title = media ? media["title"] : null;
     const lyrics = media ? media["lyrics"] : null;
     const artist = media ? media["artist"] : null;
+    const videoId = media ? media["videoId"] : null;
     const classes = useStyles();
-
-    const [video, setVideo] = useState(null);
-
-    useEffect(() => {
-        if (media) {
-            const query = title + " " + artist;
-            youtube.get('/search', {
-                params: {
-                    q: query,
-                    part: 'snippet',
-                    maxResults: 1,
-                    key: KEY,
-                }
-            }).then((response) => {
-                setVideo(response.data.items[0]);
-                console.log("received from youtube");
-            }).catch(function (error) {
-                console.log("failed to call youtube" + error);
-                console.log(error);
-                return <div></div>;
-            });
-        }
-    }, [media, artist, title]);
 
     if (!media) {
         return <div></div>
@@ -65,8 +40,11 @@ export default function MediaPage(props) {
         <div>
             <Card className={classes.root}>
                 <CardContent className={classes.content}>
-                    <CardMedia className={classes.media} component='iframe' src={video ? `https://www.youtube.com/embed/${video.id.videoId}` : ''} frameBorder="0" title="youtube" style={{ height: 630, width: 1120}}>
+                    <CardMedia className={classes.media} component='iframe' src={videoId ? `https://www.youtube.com/embed/${videoId}` : ''} frameBorder="0" title="youtube" style={{ height: 630, width: 1120}}>
                     </CardMedia>
+                    <br />
+                    <br />
+                    <br />
                     <Typography component="h4" variant="h4" color="textSecondary">
                         {title}
                     </Typography>

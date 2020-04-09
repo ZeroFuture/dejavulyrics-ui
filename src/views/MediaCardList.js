@@ -23,7 +23,9 @@ export default function MediaCardList(props) {
                     onSelectMedia={props.onSelectMedia} 
                     artist={resultRecord['_source']['song_artist']} 
                     title={resultRecord['_source']['song_title']} 
-                    lyrics={resultRecord['_source']['song_lyrics']}/>
+                    lyrics={resultRecord['_source']['song_lyrics']}
+                    videoId={resultRecord['_source']['videoId']}
+                    />
             </ListItem>
             );
         });
