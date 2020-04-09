@@ -6,36 +6,20 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 
-const KEY = process.env.YOUTUBE_KEY;
+const KEY = process.env.REACT_APP_YOUTUBE_KEY;
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
-    },
-    details: {
-      display: 'flex',
-      flexDirection: 'column',
+      width: 1500,
+      margin: 'auto',
     },
     content: {
       flex: '1 0 auto',
       textAlign: 'center',
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
-    cover: {
-      width: 300,
-      height: 300,
-      paddingLeft: 200
-    },
-    controls: {
-      display: 'flex',
-      alignItems: 'center',
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-    },
-    playIcon: {
-      height: 38,
-      width: 38,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      padding: 'auto',
     },
     media: {
         height: 500,
@@ -67,11 +51,11 @@ export default function MediaPage(props) {
                 console.log("received from youtube");
             }).catch(function (error) {
                 console.log("failed to call youtube" + error);
+                console.log(error);
                 return <div></div>;
             });
         }
     }, [media, artist, title]);
-
 
     if (!media) {
         return <div></div>
@@ -80,25 +64,22 @@ export default function MediaPage(props) {
     return (
         <div>
             <Card className={classes.root}>
-
-            <div className={classes.details}>
                 <CardContent className={classes.content}>
-                    <CardMedia className={classes.media} component='iframe' src={video ? `https://www.youtube.com/embed/${video.id.videoId}` : ''} frameBorder="0" title="youtube" style={{ height: 315, width: 560}}>
+                    <CardMedia className={classes.media} component='iframe' src={video ? `https://www.youtube.com/embed/${video.id.videoId}` : ''} frameBorder="0" title="youtube" style={{ height: 630, width: 1120}}>
                     </CardMedia>
-                    <Typography component="h5" variant="h5">
+                    <Typography component="h2" variant="h2" color="textPrimary">
                         {title}
                     </Typography>
                     <br />
                     <br />
-                    <Typography variant="subtitle1" color="textSecondary">
+                    <Typography variant="h5" color="textSecondary">
                         {artist}
                     </Typography>
                     <br />
                     <br />
-                    <Typography variant="body2" color="textSecondary" dangerouslySetInnerHTML={{ __html: lyrics.replace(/\n/g, "<br />") }}>
+                    <Typography variant="subtitle1" color="textSecondary" dangerouslySetInnerHTML={{ __html: lyrics.replace(/\n/g, "<br />") }}>
                     </Typography>
                 </CardContent>
-            </div>
             </Card>
         </div>
     )

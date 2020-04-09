@@ -11,6 +11,10 @@ import Link from '@material-ui/core/Link';
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+      width: 1200,
+      margin: 'auto',
+      padding: 'auto', 
+      textAlign: 'center',
     },
     details: {
       display: 'flex',
@@ -18,21 +22,14 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
       flex: '1 0 auto',
+      paddingLeft: 100,
+      width: 500,
     },
     cover: {
       width: 300,
       height: 300,
-      paddingLeft: 200
-    },
-    controls: {
-      display: 'flex',
-      alignItems: 'center',
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-    },
-    playIcon: {
-      height: 38,
-      width: 38,
+      paddingLeft: 'auto',
+      marginLeft:'auto',
     },
   }));
 
@@ -62,28 +59,26 @@ export default function MediaCard(props) {
     }, [searchQuery]);
 
     return (
-        <div>
-            <Card className={classes.root}>
-            <div className={classes.details}>
-                <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                    <Link onClick={(event) => props.onSelectMedia({"artist": props.artist, "title": props.title, "lyrics": props.lyrics})}>
-                        {title}
-                    </Link>
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                    {artist}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" dangerouslySetInnerHTML={{ __html: lyrics.replace(/\n/g, "<br/ >") }}>
-                </Typography>
-                </CardContent>
-            </div>
-            <CardMedia
-                className={classes.cover}
-                image={getAlbum()}
-                title="Album cover"
-            />
-            </Card>
+        <Card className={classes.root} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+        <div className={classes.details}>
+            <CardContent className={classes.content}>
+            <Typography component="h5" variant="h5">
+                <Link onClick={(event) => props.onSelectMedia({"artist": props.artist, "title": props.title, "lyrics": props.lyrics})}>
+                    {title}
+                </Link>
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+                {artist}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" dangerouslySetInnerHTML={{ __html: lyrics.replace(/\n/g, "<br/ >") }}>
+            </Typography>
+            </CardContent>
         </div>
+        <CardMedia
+            className={classes.cover}
+            image={getAlbum()}
+            title="Album cover"
+        />
+        </Card>
     )
 }

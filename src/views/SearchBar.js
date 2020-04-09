@@ -9,13 +9,14 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
 import dejavulyrics from '../apis/dejavulyrics';
+import Container from '@material-ui/core/Container';
 
 
 const BootstrapInput = withStyles((theme) => ({
     root: {
       'label + &': {
         marginTop: theme.spacing(3),
-      },
+      }
     },
     input: {
       borderRadius: 4,
@@ -47,9 +48,15 @@ const BootstrapInput = withStyles((theme) => ({
   }))(InputBase);
   
 const useStyles = makeStyles((theme) => ({
-margin: {
-    margin: theme.spacing(1),
-},
+    margin: {
+        margin: theme.spacing(3),
+    },
+    root: {
+        display: 'flex',
+        margin: 'auto',
+        paddingLeft: 'auto',
+        paddingRight: 'auto',
+    },
 }));
 
 export default function SearchBar(props) {
@@ -82,7 +89,7 @@ export default function SearchBar(props) {
     const filterOptions = (options, { inputValue }) => options;
 
     return (
-        <div>
+        <Container className={classes.root}>
             <FormControl className={classes.margin}>
             <Autocomplete
                 id="lyrics-search-autocomplete"
@@ -93,7 +100,7 @@ export default function SearchBar(props) {
                 options={suggestions.map((suggestion) => suggestion.text.replace(/\n/g, " "))}
                 renderInput={(params) => {
                     return (<TextField {...params} 
-                        label="lyrics search" margin="normal" 
+                        label="Enter artist, title, and of course, lyrics :)" margin="normal" 
                         variant="outlined" 
                         onChange={(event, values) => {
                             onInputChange(event.target.value);
@@ -106,7 +113,7 @@ export default function SearchBar(props) {
             />
             </FormControl>
             <FormControl className={classes.margin}>
-            <InputLabel id="search-type-dropdown">searchType</InputLabel>
+            <InputLabel id="search-type-dropdown">search type</InputLabel>
             <Select
                 labelId="search-type-dropdown"
                 id="search-type-dropdown"
@@ -116,6 +123,7 @@ export default function SearchBar(props) {
                     setSearchType(event.target.value);
                     setSuggestion([]);
                 }}
+                style={{ width: 200 }}
                 input={<BootstrapInput />}
             >
                 <MenuItem value={'song_document'}>Song Lyrics</MenuItem>
@@ -135,6 +143,6 @@ export default function SearchBar(props) {
                 Submit
             </Button>
             </FormControl>
-        </div>
+        </Container>
     );
 }
