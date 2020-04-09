@@ -67,7 +67,7 @@ export default function MediaPage(props) {
                 <CardContent className={classes.content}>
                     <CardMedia className={classes.media} component='iframe' src={video ? `https://www.youtube.com/embed/${video.id.videoId}` : ''} frameBorder="0" title="youtube" style={{ height: 630, width: 1120}}>
                     </CardMedia>
-                    <Typography component="h2" variant="h2" color="textPrimary">
+                    <Typography component="h4" variant="h4" color="textSecondary">
                         {title}
                     </Typography>
                     <br />
