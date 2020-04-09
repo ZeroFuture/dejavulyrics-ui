@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: 'https://dejavulyrics-server.herokuapp.com',
     timeout: 50000,
     headers: {
         'Content-Type': 'application/json',
